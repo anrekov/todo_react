@@ -6,6 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 function App() {
+  // Для инпута
+  const [value, setValue] = useState('');
+  // отображаемые записи и хук для них
+  const [todos, setTodos] = useState([]);
+  // Фокусировка на инпуте
+  const inputRef = useRef();
+  // Подсветка активной кнопки
+  const [filter, setFilter] = useState('ALL')
   // записи и хук для них
   const [todosStorage, setTodosStorage] = useState([
     {
@@ -24,9 +32,6 @@ function App() {
       isDone: true
     }
   ]);
-
-  // отображаемые записи и хук для них
-  const [todos, setTodos] = useState([]);
 
   // при рендере и обновлении основных записей => перезаписать отображаемые записи
   useEffect(() => {
@@ -51,12 +56,6 @@ function App() {
     }))
   }
 
-  // Фокусировка на инпуте
-  const inputRef = useRef();
-
-  // Подсветка активной кнопки
-  const [filter, setFilter] = useState('ALL')
-
   // Редактировать запись по двойному клику
   const handleEditTodo = (id) => {
     setTodosStorage(todosStorage.filter(todo => todo.id !== id))
@@ -64,40 +63,34 @@ function App() {
     setValue(forInputValule);
   }
 
+  // 
+  const handleChangeFilter = (buttonFilter) => {
+    setFilter(buttonFilter)
+
+    const filteredTodos = todosStorage.filter(todo => {
+      if (buttonFilter === 'ACTIVE') {
+        return !todo.isDone
+      }
+
+      if (buttonFilter === 'COMPLETED') {
+        return todo.isDone
+      }
+
+      return todo
+    })
+
+    setTodos(filteredTodos)
+  }
+
   // получить id, фильтр по записям = удаление по совпадению id
   const handleDeleteTodo = (id) => {
     setTodosStorage(todosStorage.filter(todo => todo.id !== id))
   }
 
-  // Показать активные
-  const handleClickActive = () => {
-    setTodos(todosStorage.filter(todo => todo.isDone !== true));
-    setFilter('ACTIVE');
-  }
-
-  // Показать завершеннные
-  const handleClickCompleted = () => {
-    setTodos(todosStorage.filter(todo => todo.isDone === true));
-    setFilter('COMPLETED');
-  }
-
-  // Показать все
-  const handleClickAll = () => {
-    setTodos(todosStorage);
-    setFilter('ALL');
-  }
-
   // Удалить все выполненные
   const handleClickDeleteCompleted = () => {
-    setTodosStorage(todosStorage.filter(todo => todo.isDone !== true));
-    setFilter('CLEARCOMPLETED');
-    setTimeout(() => {
-      setFilter('ALL');
-    }, 250);
+    setTodosStorage(todosStorage.filter(todo => !todo.isDone));
   }
-
-  // Для инпута
-  const [value, setValue] = useState('');
 
   return (
     <div className='todo-list'>
@@ -123,7 +116,12 @@ function App() {
       {/* если есть задачи, то пройтись по ним с помощью map и вывести через функцию проверки на чек */}
       {todos && todos.map(todo => <TodoItem key={todo.id} todo={todo} handleDoneTodo={handleDoneTodo} handleDeleteTodo={handleDeleteTodo} handleEditTodo={handleEditTodo} />)}
 
-      <Buttons handleClickActive={handleClickActive} handleClickCompleted={handleClickCompleted} handleClickAll={handleClickAll} handleClickDeleteCompleted={handleClickDeleteCompleted} filter={filter} /> 
+      <Buttons
+        handleChangeFilter={handleChangeFilter}
+        handleClickDeleteCompleted={handleClickDeleteCompleted}
+        filter={filter}
+      />
+
     </div>
   )
 }
