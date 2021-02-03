@@ -104,7 +104,7 @@ function App() {
         }}>
         <input
           placeholder='What needs to be done?'
-          id='writeTask'
+          className='writeTask'
           onChange={e => {
             setValue(e.target.value);
           }}
