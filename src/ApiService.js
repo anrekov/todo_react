@@ -1,4 +1,6 @@
-const API_URL = 'https://exceed-todo-list.herokuapp.com/api/v1/todos'
+// подключается к прокси серверу: http://localhost:8080, а затем добавляет эту часть
+const API_URL = '/api/todos'  
+// https://exceed-todo-list.herokuapp.com/api/v1/todos
 const API_KEY = "802ede49-5af8-4bcb-a8c7-d4f8da06f0a2"
 
 export const getAll = () => {

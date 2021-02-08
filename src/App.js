@@ -6,7 +6,6 @@ import { getAll } from "./ApiService";
 import { sendRequest } from "./ApiService";
 import { postTodo } from "./ApiService";
 
-
 function App() {
   // Для инпута
   const [value, setValue] = useState("");
@@ -94,6 +93,7 @@ function App() {
       `/clear-done`,
       "delete"
     );
+    setFilter('ALL');
   };
 
   return (
