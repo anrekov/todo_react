@@ -1,0 +1,42 @@
+.Login {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+}
+
+.Login div {
+  display: flex;
+  flex: 1 1 100%;
+}
+
+.Login div input {
+  flex: 1 1 100%;
+}
+
+.Login div span {
+  flex: 1 1 18%;
+}
+
+.Login input, .Login span {
+  flex: 1 1 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.Login span {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid grey;
+}
+
+.Login button {
+  flex: 1 1 10%;
+  padding: 5px;
+  margin: 10px;
+}
+
+.Login a {
+  text-decoration: none;
+  color: black;
+}

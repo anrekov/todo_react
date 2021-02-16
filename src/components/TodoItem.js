@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-function TodoItem({ todo, handleDoneTodo, handleDeleteTodo, handleEditTodo }) {
+const TodoItem = ({ todo, handleDoneTodo, handleDeleteTodo, handleEditTodo }) => {
   const [hideValue, setHideValue] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   // при нажатии передавать id и обрабатывать его для чека
   const handleClick = () => {
@@ -28,8 +28,8 @@ function TodoItem({ todo, handleDoneTodo, handleDeleteTodo, handleEditTodo }) {
         onDoubleClick={handleEditOne}
         onClick={handleClick}
         style={{
-          textDecoration: todo.isDone ? "line-through" : "none",
-          display: hideValue ? "none" : "block",
+          textDecoration: todo.isDone ? 'line-through' : 'none',
+          display: hideValue ? 'none' : 'block',
         }}
       >
         {todo.title}
@@ -42,7 +42,7 @@ function TodoItem({ todo, handleDoneTodo, handleDeleteTodo, handleEditTodo }) {
       >
         <input
           onBlur={handleChangeTodo}
-          type={hideValue ? "none" : "hidden"}
+          type={hideValue ? 'none' : 'hidden'}
           onChange={(e) => {
             setValue(e.target.value);
           }}
@@ -51,7 +51,7 @@ function TodoItem({ todo, handleDoneTodo, handleDeleteTodo, handleEditTodo }) {
       </form>
 
       <span onClick={handleDeleteOne} className="close">
-        {"\u00D7"}
+        {'\u00D7'}
       </span>
     </div>
   );

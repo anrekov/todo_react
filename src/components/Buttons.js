@@ -1,23 +1,36 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Buttons({ handleChangeFilter, handleClickDeleteCompleted, filter }) {
+const Buttons = ({
+  handleChangeFilter,
+  handleClickDeleteCompleted,
+  filter,
+}) => {
+  const handleClickInOut = () => {
+    localStorage.setItem('token', '');
+  };
   return (
     <div className="btns">
+      <button className="todoBtn loginBtn" onClick={handleClickInOut}>
+        <Link to="/login">
+          Sign Out
+        </Link>
+      </button>
       <button
-        className={filter === "ALL" ? "lightBtn todoBtn" : "todoBtn"}
-        onClick={() => handleChangeFilter("ALL")}
+        className={filter === 'ALL' ? 'lightBtn todoBtn' : 'todoBtn'}
+        onClick={() => handleChangeFilter('ALL')}
       >
         All
       </button>
       <button
-        className={filter === "ACTIVE" ? "lightBtn todoBtn" : "todoBtn"}
-        onClick={() => handleChangeFilter("ACTIVE")}
+        className={filter === 'ACTIVE' ? 'lightBtn todoBtn' : 'todoBtn'}
+        onClick={() => handleChangeFilter('ACTIVE')}
       >
         Active
       </button>
       <button
-        className={filter === "COMPLETED" ? "lightBtn todoBtn" : "todoBtn"}
-        onClick={() => handleChangeFilter("COMPLETED")}
+        className={filter === 'COMPLETED' ? 'lightBtn todoBtn' : 'todoBtn'}
+        onClick={() => handleChangeFilter('COMPLETED')}
       >
         Completed
       </button>
@@ -26,6 +39,6 @@ function Buttons({ handleChangeFilter, handleClickDeleteCompleted, filter }) {
       </button>
     </div>
   );
-}
+};
 
 export default Buttons;
