@@ -36,7 +36,7 @@ const UserInfo = () => {
       email: values.email,
       age: values.age,
     }).then(() => {
-      history.push('/user');
+      history.go(0); 
     });
   };
 
